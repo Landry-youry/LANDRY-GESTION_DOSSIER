@@ -1,0 +1,10 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fa fa-user-plus"></i> Créer un compte</h2>
+
+<form method="post" class="form-box">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-primary"><i class="fa fa-check-circle"></i> S’inscrire</button>
+</form>
+{% endblock %}

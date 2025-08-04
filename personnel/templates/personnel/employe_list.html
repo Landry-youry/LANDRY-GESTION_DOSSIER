@@ -1,0 +1,52 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fa fa-users"></i> Liste des employés</h2>
+
+<div style="text-align: right; margin-bottom: 20px;">
+    <a href="{% url 'add_employe' %}" class="btn-primary">
+        <i class="fa fa-plus-circle"></i> Ajouter un employé
+    </a>
+</div>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Nom</th>
+            <th>Poste</th>
+            <th>Salaire</th>
+            <th>Date d'embauche</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in employes %}
+        <tr>
+            <td>
+                {% if emp.photo %}
+                    <img src="{{ emp.photo.url }}" width="50" height="50" style="border-radius: 5px; object-fit: cover;">
+                {% else %}
+                    <i class="fa fa-user-circle" style="font-size: 40px; color: #ccc;"></i>
+                {% endif %}
+            </td>
+            <td>{{ emp.user.first_name }} {{ emp.user.last_name }}</td>
+            <td>{{ emp.poste }}</td>
+            <td>{{ emp.salaire }} $</td>
+            <td>{{ emp.date_embauche|date:"d/m/Y" }}</td>
+            <td style="text-align: center;">
+                <a href="{% url 'edit_employe' emp.pk %}" class="btn-action" title="Modifier">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_employe' emp.pk %}" class="btn-action btn-danger" title="Supprimer">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align: center;">Aucun employé trouvé.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

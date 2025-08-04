@@ -1,0 +1,35 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fa fa-folder-open"></i> Dossiers du personnel</h2>
+
+<div style="text-align: right; margin-bottom: 20px;">
+    <a href="{% url 'add_dossier' %}" class="btn-primary"><i class="fa fa-plus-circle"></i> Ajouter un dossier</a>
+</div>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Employé</th>
+            <th>Titre</th>
+            <th>Fichier</th>
+            <th>Date d’ajout</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dossier in dossiers %}
+        <tr>
+            <td>{{ dossier.employe.user.get_full_name }}</td>
+            <td>{{ dossier.titre }}</td>
+            <td><a href="{{ dossier.fichier.url }}" target="_blank">Télécharger</a></td>
+            <td>{{ dossier.date_ajout|date:"d/m/Y H:i" }}</td>
+            <td>
+                <a href="{% url 'delete_dossier' dossier.pk %}" class="btn-action btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="text-align: center;">Aucun dossier trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fa fa-trash"></i> Supprimer l’employé</h2>
+
+<p>Êtes-vous sûr de vouloir supprimer l’employé <strong>{{ employe.user.get_full_name }}</strong> ?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-danger"><i class="fa fa-times-circle"></i> Confirmer la suppression</button>
+    <a href="{% url 'employe_list' %}" class="btn">Annuler</a>
+</form>
+{% endblock %}

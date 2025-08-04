@@ -1,0 +1,11 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fa fa-sign-in-alt"></i> Connexion</h2>
+
+<form method="post" class="form-box">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Nom d’utilisateur" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <button type="submit" class="btn-primary"><i class="fa fa-lock"></i> Se connecter</button>
+</form>
+{% endblock %}

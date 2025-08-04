@@ -1,0 +1,10 @@
+{% extends 'personnel/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="welcome-box">
+    <h1>Bienvenue sur <span class="highlight">LandryCorp</span></h1>
+    <p>Plateforme de gestion des dossiers du personnel avec interface moderne, sécurisée et performante.</p>
+    <img src="{% static 'images/hr-team.jpg' %}" alt="Équipe RH" class="home-image">
+</div>
+{% endblock %}

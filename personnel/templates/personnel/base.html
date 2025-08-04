@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>LandryCorp</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Barre de navigation supérieure -->
+    <header class="navbar">
+        <div class="logo-title">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>LandryCorp</span>
+        </div>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <span class="user"><i class="fa fa-user"></i> {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn">Se déconnecter</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn">Connexion</a>
+                <a href="{% url 'register' %}" class="btn">S’inscrire</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Contenu global divisé en 2 panneaux -->
+    <div class="container">
+        <!-- Panneau gauche -->
+        <aside class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Accueil</a></li>
+                <li><a href="{% url 'employe_list' %}"><i class="fa fa-users"></i> Employés</a></li>
+                <li><a href="#"><i class="fa fa-briefcase"></i> Postes</a></li>
+                <li><a href="{% url 'dossier_list' %}"><i class="fa fa-folder"></i> Dossiers</a></li>
+                <li><a href="#"><i class="fa fa-cogs"></i> Paramètres</a></li>
+                <a href="{% url 'add_employe' %}" class="btn-primary"><i class="fa fa-plus"></i> Ajouter un employé</a>
+                <li><a href="{% url 'gestion_roles' %}"><i class="fa fa-user-shield"></i> Gérer rôles RH</a></li>
+
+            </ul>
+        </aside>
+        
+
+        <!-- Panneau droit -->
+        <main class="main-panel">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 LandryCorp. Tous droits réservés. | Conçu avec ❤️ par LANDRY
+    </footer>
+    
+
+</body>
+</html>

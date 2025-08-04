@@ -1,0 +1,14 @@
+{% extends 'personnel/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="page-title"><i class="fa fa-upload"></i> Ajouter un dossier</h2>
+
+<form method="post" enctype="multipart/form-data" class="form-box">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-primary"><i class="fa fa-save"></i> Enregistrer le dossier</button>
+    <a href="{% url 'dossier_list' %}" class="btn">Annuler</a>
+</form>
+
+{% endblock %}

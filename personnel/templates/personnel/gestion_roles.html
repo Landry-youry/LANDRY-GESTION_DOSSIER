@@ -1,0 +1,44 @@
+{% extends 'personnel/base.html' %}
+{% block content %}
+
+<h2 class="page-title"><i class="fa fa-user-cog"></i> Gestion des rôles RH</h2>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Rôle actuel</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.is_rh %}
+                    <span style="color: green;"><i class="fa fa-check-circle"></i> RH</span>
+                {% else %}
+                    <span style="color: gray;"><i class="fa fa-user"></i> Utilisateur</span>
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" action="{% url 'toggle_rh' user.id %}">
+                    {% csrf_token %}
+                    {% if user.is_rh %}
+                        <button type="submit" class="btn-danger">Retirer rôle RH</button>
+                    {% else %}
+                        <button type="submit" class="btn-primary">Donner rôle RH</button>
+                    {% endif %}
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
